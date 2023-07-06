@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module lab5_top(
+module lab4_top(
     output [7:0] qOut,
     output [4:0] Target,
     output [3:0] Anode_Activate, // anode signals of the 7-segment LED display
