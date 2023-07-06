@@ -1,0 +1,24 @@
+`timescale 1ns / 1ps
+
+module lab5_top(
+    output [7:0] qOut,
+    output [4:0] Target,
+    output [3:0] Anode_Activate, // anode signals of the 7-segment LED display
+    output [6:0] LED_out,// cathode patterns of the 7-segment LED display
+    input clk,
+    input rst,
+    input roll,
+    input [7:0] seed
+); 
+        wire cout;
+        wire [1:0] sel;
+        wire [4:0] sum;
+        wire [4:0] Target;
+        wire [7:0] q;
+        clock_divider CDIV (clk,cout);
+        lfsr LFSR (q,seed,cout,rst);
+        CasinoFSM game(roll,rst,clk,q,sel,Target,qOut);
+        seven_segment SEG (clk,qOut,sel,rst,Anode_Activate,LED_out);
+
+endmodule
+
