@@ -4,7 +4,7 @@
 
 
 module clock_divider (input cin, output cout);
-    parameter timeconst = 110;//Output Frequency = 100*10^6 / (2 * (TIMECONST ^ 4))
+    parameter timeconst = 110; //Output Frequency = 100*10^6 / (2 * (TIMECONST ^ 4))
     integer count0;
     integer count1;
     integer count2;
