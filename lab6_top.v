@@ -9,13 +9,11 @@ module lab6_top(
     input [2:0] State,
     output[7:0] charCount
 );
-    wire cout;
     wire clk1HZ;
     wire [31:0] characters;
     wire [7:0] loadedChar;
     wire [7:0] seg;
     assign seg = ~segIn;
-    clock_divider CDIV (clk,cout);
     slow_clk_1Hz slowCLK(clk, clk1HZ);
     textmover text(rst,clk,clk1HZ,seg,State,characters,loadedChar,charCount);
     seven_segment SEG(clk,rst,characters,loadedChar,seg,State,Anode_Activate,LED_out);
