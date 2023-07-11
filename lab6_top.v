@@ -17,11 +17,7 @@ module lab6_top(
     slow_clk_1Hz slowCLK(clk, clk1HZ);
     textmover text(rst,clk,clk1HZ,seg,State,characters,loadedChar,charCount);
     seven_segment SEG(clk,rst,characters,loadedChar,seg,State,Anode_Activate,LED_out);
-
 endmodule
-
-
-
 //E: 01001111
 //4: 00110011
 //3: 01111001
