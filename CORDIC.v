@@ -32,56 +32,16 @@ module CORDIC(clock, sine, cosine, x_start, y_start, angle);
   assign atan_table[13] = 'b00000000000000010100010111110011;
   assign atan_table[14] = 'b00000000000000001010001011111001;
   assign atan_table[15] = 'b00000000000000000101000101111100;
-//  assign atan_table[16] = 'b00000000000000000010100010111110;
-//  assign atan_table[17] = 'b00000000000000000001010001011111;
-//  assign atan_table[18] = 'b00000000000000000000101000101111;
-//  assign atan_table[19] = 'b00000000000000000000010100010111;
-//  assign atan_table[20] = 'b00000000000000000000001010001011;
-//  assign atan_table[21] = 'b00000000000000000000000101000101;
-//  assign atan_table[22] = 'b00000000000000000000000010100010;
-//  assign atan_table[23] = 'b00000000000000000000000001010001;
-//  assign atan_table[24] = 'b00000000000000000000000000101000;
-//  assign atan_table[25] = 'b00000000000000000000000000010100;
-//  assign atan_table[26] = 'b00000000000000000000000000001010;
-//  assign atan_table[27] = 'b00000000000000000000000000000101;
-//  assign atan_table[28] = 'b00000000000000000000000000000010;
-//  assign atan_table[29] = 'b00000000000000000000000000000001;
-//  assign atan_table[30] = 'b00000000000000000000000000000000;
 
   reg signed [width:0] x [0:width-1];
   reg signed [width:0] y [0:width-1];
   reg signed    [31:0] z [0:width-1];
 
-
-    // make sure rotation angle is in -pi/2 to pi/2 range
-  wire [1:0] quadrant;
-  assign quadrant = angle[31:30];
-
   always @(posedge clock)
   begin // make sure the rotation angle is in the -pi/2 to pi/2 range
-    case(quadrant)
-      2'b00,
-      2'b11: // no changes needed for these quadrants
-      begin
         x[0] <= x_start;
         y[0] <= y_start;
         z[0] <= angle;
-      end
-
-      2'b01:
-      begin
-        x[0] <= -y_start;
-        y[0] <= x_start;
-        z[0] <= {2'b00,angle[29:0]}; // subtract pi/2 for angle in this quadrant
-      end
-
-      2'b10:
-      begin
-        x[0] <= y_start;
-        y[0] <= -x_start;
-        z[0] <= {2'b11,angle[29:0]}; // add pi/2 to angles in this quadrant
-      end
-    endcase
   end
 
 
@@ -114,5 +74,5 @@ module CORDIC(clock, sine, cosine, x_start, y_start, angle);
      assign cosine = x[width-1];
      assign sine = y[width-1];
 endmodule
-
+-
 
